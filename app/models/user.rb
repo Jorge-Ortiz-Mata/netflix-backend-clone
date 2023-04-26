@@ -5,5 +5,5 @@ class User < ApplicationRecord
   validates :password, presence: true
   validates :password_confirmation, presence: true
 
-  has_one :access_token
+  has_one :access_token, dependent: :destroy
 end

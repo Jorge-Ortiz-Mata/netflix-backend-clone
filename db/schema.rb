@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_015929) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_26_214141) do
+  create_table "access_tokens", force: :cascade do |t|
+    t.string "token"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -18,4 +26,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_015929) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "access_tokens", "users"
 end

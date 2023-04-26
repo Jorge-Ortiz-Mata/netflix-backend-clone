@@ -9,7 +9,7 @@ module Api
         if user.save
           user.access_token.delete if user.access_token.present?
 
-          payload = { user: user }
+          payload = { user: user.email }
           token = JWT.encode payload, ENV['APP_JWT_KEY'], 'HS256'
           user.create_access_token(token: token)
           render json: { access_token: token }, status: :ok

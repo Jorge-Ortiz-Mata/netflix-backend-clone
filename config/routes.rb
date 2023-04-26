@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      delete 'access_token/delete', to: 'access_tokens#destroy'
       resources :users, only: %i[create update destroy]
       get "sessions/validate/email", to: "sessions#validate_email"
     end

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class MoviesController < ApplicationController
+    class MoviesController < AuthenticatedController
       before_action :set_movie, only: %i[ show update destroy ]
 
       def index

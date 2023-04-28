@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
 
   namespace :api do
     namespace :v1 do
+      # Movies routes.
+      resources :movies
+
+
       # Access Tokens routes.
       delete 'access_token/delete', to: 'access_tokens#destroy'
 

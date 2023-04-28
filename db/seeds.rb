@@ -6,5 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-puts "Seeding Users..."
-require_relative("./users_seed.rb")
+if User.all.count.eql? 0
+  puts "Seeding Users..."
+  require_relative("./users_seed.rb")
+end
+
+if Movie.all.count.eql? 0
+  puts "Seeding Movies..."
+  require_relative("./movies_seed.rb")
+end

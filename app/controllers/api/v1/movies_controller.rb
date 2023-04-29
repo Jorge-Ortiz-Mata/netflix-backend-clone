@@ -5,8 +5,6 @@ module Api
 
       def index
         @movies = Movie.all
-
-        render json: @movies
       end
 
       def show
@@ -14,12 +12,15 @@ module Api
       end
 
       def create
-        @movie = Movie.new(movie_params)
+        @movie = Movie.new movie_params
 
         if @movie.save
-          render json: @movie, status: :created, location: @movie
+          render json: @movie, status: :ok
         else
-          render json: @movie.errors, status: :unprocessable_entity
+          errors = []
+          @movie.errors.each { |error| errors << error.full_message }
+
+          render json: {errors: errors}, status: :unprocessable_entity
         end
       end
 
@@ -41,7 +42,7 @@ module Api
       end
 
       def movie_params
-        params.require(:movie).permit(:name, :description, :year, :duration)
+        params.require(:movie).permit(:name, :description, :year, :duration, :avatar)
       end
     end
   end

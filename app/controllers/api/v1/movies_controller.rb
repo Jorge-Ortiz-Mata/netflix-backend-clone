@@ -7,9 +7,7 @@ module Api
         @movies = Movie.all
       end
 
-      def show
-        render json: @movie
-      end
+      def show; end
 
       def create
         @movie = Movie.new movie_params

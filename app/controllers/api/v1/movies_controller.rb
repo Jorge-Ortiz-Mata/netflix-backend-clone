@@ -24,9 +24,12 @@ module Api
 
       def update
         if @movie.update(movie_params)
-          render json: @movie
+          render json: @movie, status: :ok
         else
-          render json: @movie.errors, status: :unprocessable_entity
+          errors = []
+          @movie.errors.each { |error| errors << error.full_message }
+
+          render json: {errors: errors}, status: :unprocessable_entity
         end
       end
 
